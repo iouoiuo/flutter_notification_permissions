@@ -71,14 +71,7 @@ public class SwiftNotificationPermissionsPlugin: NSObject, FlutterPlugin {
 						  });
 					  }
 				  }
-              } else if (status == self.permissionDenied) {
-                  // The user has denied the permission he must go to the settings screen
-                  if let arguments = call.arguments as? Dictionary<String, Bool> {
-					  if (arguments["openSettings"] != nil && arguments["openSettings"] == false)  {
-						  result(self.permissionDenied)
-						  return
-					  }
-				  }
+              } else{  
                   if let url = URL(string:UIApplication.openSettingsURLString) {
                       if UIApplication.shared.canOpenURL(url) {
                           if #available(iOS 10.0, *) {
@@ -88,8 +81,6 @@ public class SwiftNotificationPermissionsPlugin: NSObject, FlutterPlugin {
                           }
                       }
                   }
-                  result(nil)
-              } else {
                   result(nil)
               }
           })
